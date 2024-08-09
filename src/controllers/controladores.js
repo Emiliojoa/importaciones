@@ -1,5 +1,5 @@
-import {newConnection} from '../db/database.js'
-
+import newConnection from '../db/database.js'
+import {} from 'express-validator'
 export async function obtener(req, res) {
     const conexion= await newConnection()
     const result = await conexion.query("SELECT * FROM tasks")
@@ -9,27 +9,11 @@ export async function obtener(req, res) {
 }
 export async function agregar(req, res) {
     const conexion= await newConnection()
-    const {title, description,isComplete}=req.body;
-    const regex = /^(\S+)( \S+)*$/
-
-    if(title.length === 0 || description.length === 0){
-        res.json({msg: "Los campos no deben estar vacios."})
-    } else if (regex.test(title)){
-        const isCompleteValue = isComplete === true || isComplete === 'true' ? 1 : 0;
-        const result = await conexion.query("INSERT INTO tasks (`title`, `description`, `isComplete`) VALUES (?, ?, ?)", [title, description, isCompleteValue]);
-        res.json({msg: "Task agregada correctamente", result})
-        {
-            if (result.affectedRows === 0) {
-                res.json({msg: "No se encontró la task con el id especificado."});
-            } else {
-                res.json({msg: "Se agregó la task correctamente.", result});
-            }
-        }
+    const {title, description,isComplete}=req.body
+        const result = await conexion.query("INSERT INTO tasks (`title`, `description`, `isComplete`) VALUES (?, ?, ?)", [title, description, isComplete]);
+    return res.json(result[0])
 }
-    res.status(201).json({message:'Task agregado'})
 
-    
-}
 
 export async function actualizar(req, res) {
     const conexion= await newConnection()

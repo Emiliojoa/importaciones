@@ -4,7 +4,8 @@ import morgan from 'morgan'
 
 
 const app = express()
-import {router } from './src/router/rutas.js'
+import router  from './src/router/rutas.js'
+
 
 app.use(express.json())
 app.use(cors ())

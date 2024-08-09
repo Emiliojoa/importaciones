@@ -2,13 +2,14 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "express-validator": "^7.1.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.11.0"
   },
   "name": "emilio",
   "version": "1.0.0",
   "main": "app.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "dev": "node --watch app.js"
   },
